@@ -1,7 +1,7 @@
 //
 // Created by Roadb on 6/09/2026.
 // first c code ong
-// long ago i did a very shitty c++ course on w3school or wtv so i think i can do c with no other knowledge.
+// long ago i did a very shitty c++ course on w3schools or wtv so i think i can do c with no other knowledge.
 // gonna try and do this because ai told me i should learn this before trying to code an assembly interpreter.
 // https://www.geeksforgeeks.org/c/bitwise-operators-in-c-cpp/
 // i understand that a bitwise operation is just an operation directly on the individual bits of some data, either actual bits or the bits of an integer for eg,
