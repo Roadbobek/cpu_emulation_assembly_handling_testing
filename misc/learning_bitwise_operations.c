@@ -22,19 +22,20 @@ int main(void)
     // the printf function returns an integer, it returns the number of characters printed
     // (excluding the null byte used to end a string) if successful. on error, it returns a negative value.
     // unlike other languages with built-in string data types c simply implements strings as a one-dimensional
-    // array of characters terminated by a special null character ( \0 ). it is just an array of the char data type
-    // with the null terminator at the end. but what is a char in c, a char is semantically (commonly) used to represent
-    // a single text character (ascii/utf-8, which are encodings for text). but thats just an
-    // implied use case, really a char is just an integral data type (whole number, integer) just like an int, but
-    // it differs to an int in its size and range. a char is 1 byte / 8 bits while an int is minimum 2 bytes / 16 bits
+    // array of characters terminated by a special null character (\0). it is just an array of the char data type
+    // with the null terminator at the end. so in reality its not a data type instead its just a convention of sorts.
+    // but what is a char in c, a char is semantically (commonly) used to represent
+    // a single text character (ascii/utf-8, which are encodings for text). but thats just an implied use case,
+    // really a char is just an integral data type (whole number, integer) just like an int, but it
+    // differs to an int in its size and range. a char is 1 byte / 8 bits while an int is minimum 2 bytes / 16 bits
     // but commonly 4 bytes / 32 bits on desktop platforms. a chars range is -128 to 127 (signed) or 0 to 255 (unsigned),
     // where as a 4 byte signed ints range is -2,147,483,648 to 2,147,483,647.
     // a char is the smallest addressable unit / data type in c. thats the technical explenation of a char,
     // but a common use case for it is to represent a single text character, when used like this the char ofc still
     // stores an integral, but it represents a characters numeric code in a text encoding standard like ascii/utf-8.
     // for example in ascii the letter a corresponds to 97:
-    printf("%c\n", 97); // printing the int 97 as a char results in the letter a.
-    printf("%d\n", 'a'); // printing the char a results in the int 97, since thats what it stores under the hood.
+    //printf("%c\n", 97); // printing the int 97 as a char results in the letter a.
+    //printf("%d\n", 'a'); // printing the char a results in the int 97, since thats what it stores under the hood.
     // the compiler looks up 'a' in the execution character set (ascii/utf-8 on a modern desktop system) and replaces
     // it with the integer 97, this is compile-time substitution.
     // its worth noting for any operations on or using a char the compiler automatically applies integral promotion to it,
@@ -43,7 +44,17 @@ int main(void)
     // it applies to any expression context: +, -, *, ==, <<, the ternary operator, printf function arguments, etc.
     // the rule is simply, whenever a small integer type is used in an expression,
     // its value is converted to int for the purpose of that operation.
-    const char test = 97; // here if we wrote 'a' the compiler would automatically substitute 97 in its place.
-    printf("%c\n", test); // we can see the char 97 still prints to the character a.
+    //const char test = 97; // here if we wrote 'a' the compiler would automatically substitute 97 in its place.
+    //printf("%c\n", test); // we can see the char 97 still prints to the character a.
+    // going back to strings, so we know a string is a array of char elements with a null terminator, null/0 byte
+    // (written as \0). so for example, for the string "Cat" in memory it would look like this:
+    // Memory Address:  0x1000   0x1001   0x1002   0x1003
+    // byte content:   [  'C' ] [  'a' ] [  't' ] [ '\0' ]
+    // ascii decimal:  [  67  ] [  97  ] [ 116  ] [   0  ]
+    // this string would occupy 4 bytes in memory, as a single char is 1 byte plus a null byte.
+    // because c has no mechanism to store a strings length every operation (printing, copying, measuring) relies on
+    // traversing memory until hitting byte 0.
+    // study string allocation techniques, stack, heap and static / in binary.
+
     return 0;
 }
