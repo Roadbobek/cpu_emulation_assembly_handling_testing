@@ -12,9 +12,9 @@
 // well they dont really explain everything in depth since its fore begginers so i will just search it up and use geeksforgeeks for eg,
 //https://www.geeksforgeeks.org/c/printf-in-c/ + https://www.geeksforgeeks.org/c/format-specifiers-in-c/
 //
-//
 
 #include <stdio.h>
+#include <string.h>
 
 int main(void)
 {
@@ -55,6 +55,41 @@ int main(void)
     // because c has no mechanism to store a strings length every operation (printing, copying, measuring) relies on
     // traversing memory until hitting byte 0.
     // study string allocation techniques, stack, heap and static / in binary.
+    // how you declare a string drastically affects where it lives in memory and whether you can modify it,
+    // there are three distinct ways strings exist in memory.
+    // stack allocated char array (mutable):
+    // char str[] = "Hello";
+    // the binary embeds "Hello\0" in constant memory, but when this line runs, it allocates 6 bytes on the active
+    // stack frame and copies the bytes into it. fully modifiable, (str[0] = 'h'; is legal).
+    // pointer to string literal (immutable):
+    // const char *str = "Hello";
+    // stored in the read-only data segment (.rodata / text segment).
+    // the variable str is a pointer stored on the stack (occupying 4 or 8 bytes depending on architecture), it holds
+    // the memory address of "Hello\0", which resides directly in the executables read-only memory.
+    // dynamic heap string (mutable)
+    // char *str = malloc(6);
+    // strcpy(str, "Hello");
+    // (you can use a loop to copy each character from the source (*str) to the destination (newly allocated memory)
+    // until the null terminator ('\0') is reached to avoid using the string.h library / header.)
+    // located on the heap, memory is requested dynamically from the os,
+    // fully modifiable, but manual memory management (free(str)) is required.
+    // stack memory:
+    // management, automatically handled by the compiler, no manual intervention needed, (lifo).
+    // speed, faster access due to contiguous memory blocks and simple pointer adjustments.
+    // size, limited and fixed (typically a few MBs), prone to stack overflow errors.
+    // scope, thread-specific, variables cease to exist once the function scope exits.
+    // usage, ideal for small, temporary data like primitive types and local variables.
+    // thread safety, inherently safe (per-thread)
+    // heap memory:
+    // management, manually managed in languages like c/cpp (using new/delete) or via garbage collection in others.
+    // speed, slower access due to complex bookkeeping, fragmentation, and non-contiguous allocation.
+    // size, much larger and flexible, constrained mainly by available system ram.
+    // scope, global to the application, persists until explicitly freed or the program terminates.
+    // usage, essential for large data structures, objects, and data shared across functions or threads.
+    // stack memory is automatically allocated and deallocated in a last-in-first-out (lifo) order for local variables
+    // and function calls, while heap memory is manually or garbage-collected allocated for dynamic, long-lived data.
+    // thread safety, requires synchronization
+
 
     return 0;
 }
