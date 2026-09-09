@@ -89,6 +89,8 @@ int main(void)
     // stack memory is automatically allocated and deallocated in a last-in-first-out (lifo) order for local variables
     // and function calls, while heap memory is manually or garbage-collected allocated for dynamic, long-lived data.
     // thread safety, requires synchronization
+    // i wrote some bs about binary base-2 math, memory and its addresses, and cpu registers.
+    // check that out at misc\learning_and_practice_binary_and_memory.png
 
 
     return 0;
